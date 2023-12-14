@@ -6,11 +6,12 @@ using UnityEngine;
 
 public class ьщму : MonoBehaviour
 {
-    public int speed=4;
-    public int speed1=42;
-    public float h;
-    public float v;
-    public Rigidbody rb;
+    private int speed=4;
+    private int speed1=42;
+    private float h;
+    private float v;
+    private Rigidbody rb;
+    private int speed2=2;
 
     void Start()
     {
@@ -27,7 +28,7 @@ public class ьщму : MonoBehaviour
         transform.Translate(Vector3.forward * speed*v*Time.deltaTime);
         if (Input.GetKey(KeyCode.Space))
         {
-            rb.AddForce(Vector3.up * speed, ForceMode.Impulse); 
+            rb.AddForce(Vector3.up * speed2, ForceMode.Impulse); 
         }
 
     }

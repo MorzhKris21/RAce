@@ -1,31 +1,36 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ffff : MonoBehaviour
 {
-    public GameObject ff;
+    public GameObject col;
+    public Texture tx;
+    public Texture ty;      //Kaftosha
+
+
 
     void Start()
     {
-        
+
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-           
-        }
+
     }
-    void Spawf()
+    public void Spawf()
     {
-       Debug.Log("Ne hodi po moim gryadkam.");
+        col.GetComponent<Renderer>().material.mainTexture = ty;
     }
     private void OnCollisionEnter(Collision collision)
     {
+
         if (collision.gameObject.CompareTag("ground")) {
-            Spawf();
+            col = collision.gameObject;
+            collision.gameObject.GetComponent<Renderer>().material.mainTexture = tx;
         }
     }
+  
 }
