@@ -1,14 +1,13 @@
-VAR charname = "nya"
-VAR chimg = 0
+VAR charname = "Bulba"
+VAR emotion= 0
 
 - nya
 nya.
     - nya..    
 + nyaa
     - nya?
-~charname= "Nyaaaaa"
+~charname= "gg"
 
-~chimg= 1
 -nya nya
     +[ebd1?]
         ->ebd1
@@ -34,10 +33,11 @@ nya.
 
 - -> END*/
 === ebd1 ===
+~emotion = 2
 -nyar.
 *ff
 -neahehe. FREEDOM OF CHOICE.
-~charname = "nya"
+~charname = "Bulba"
 ->END
 === ebd2 ===
 -nyarf.

@@ -22,14 +22,16 @@ public class dialok : MonoBehaviour
     public List<Choice> currentchoices;
     public Image img;
     public List<Sprite> imgs;
-    private Dictionary<string, Sprite> naim=new Dictionary<string, Sprite>();
+    public List<chardata> chrdt;
+    [SerializeField] private Dictionary<string,int> naim=new Dictionary<string, int>();
     [SerializeField] private List<Sprite> imgess;
+    [SerializeField] private List<Dictionary<string, Sprite>> list;
 
     private void Awake()
     { 
         story = new Story(textAs.text);
-        naim.Add("nya", imgess[0]);
-        naim.Add("Nyaaaaa", imgess[1]);
+        naim.Add("Bulba", 0);
+        naim.Add("gg", 1);
     }
     private void Start()
     {
@@ -84,12 +86,14 @@ public class dialok : MonoBehaviour
     {
         tmp.text = story.Continue();
         tmpname.text = story.variablesState["charname"].ToString();
-        NameImag(story.variablesState["charname"].ToString());
+        NameImag(story.variablesState["charname"].ToString(), naim[story.variablesState["charname"].ToString()]);
     }
 
-    private void NameImag(string charnam)
+    private void NameImag(string charnam, int danuint)
     {
-        img.sprite = naim[charnam];
+        int oint = (int)story.variablesState["emotion"];
+       // img.sprite = naim[charnam];
+        img.sprite = chrdt[danuint].sprut[oint];
     /*    if (story.variablesState["charname"].ToString() == "Nyaaaaa")
         {
             Debug.Log("ouuuu");
@@ -109,4 +113,11 @@ public class dialok : MonoBehaviour
         logg.enabled = false;
         enabled = true;
     }
+
+}
+[Serializable]
+public class chardata
+{
+    public string namechar;
+    public List<Sprite> sprut;
 }
