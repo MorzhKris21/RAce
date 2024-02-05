@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -21,15 +22,16 @@ public class dialok : MonoBehaviour
     private dataCentr dC;
     public List<Choice> currentchoices;
     public Image img;
-    public List<Sprite> imgs;
     public List<chardata> chrdt;
-    [SerializeField] private Dictionary<string,int> naim=new Dictionary<string, int>();
-    [SerializeField] private List<Sprite> imgess;
+    private Dictionary<string,int> naim=new Dictionary<string, int>();
+    //[SerializeField] private List<Sprite> imgess;
     [SerializeField] private List<Dictionary<string, Sprite>> list;
+    [SerializeField] private TextAsset KarfanTxt;
 
     private void Awake()
-    { 
-        story = new Story(textAs.text);
+    {
+
+        dC = FindObjectOfType<dataCentr>();
         naim.Add("Bulba", 0);
         naim.Add("gg", 1);
     }
@@ -39,26 +41,40 @@ public class dialok : MonoBehaviour
     }
     public void ContinueStory(bool cc= false)
     {
+        Debug.Log(dC.detectNPC.name);
+        if (!dC.detectNPC.IsUnityNull()) 
+        {
+            
+            story = new Story(dC.detectNPC.GetComponent<npc>().Type == npcType.simplenpc ? textAs.text : KarfanTxt.text);
+
+        }
         if (story.canContinue)
         {
             ShowDialok();
             ShowButton();
             logg.enabled = false;
-            return;
         }
         else if (!cc)
         {
             QuitDialok();
         }
     }
+    IEnumerator Animashka(int jj)
+    {
+        for(int x=0 ; x < 4; x++)
+        {
+            img.sprite = chrdt[jj].sprut[x];
+            yield return new WaitForSeconds(0.1f);
+        }
+        
+    }
 
     private void QuitDialok()
     {
         logg.enabled = true;
         enabled = false;
-        dC = FindObjectOfType<dataCentr>();
         Destroy(dC.detectNPC);
-        img.sprite = imgess[0];
+        //img.sprite = imgess[0];
     }
 
     private void ShowButton()
@@ -82,27 +98,26 @@ public class dialok : MonoBehaviour
         //}
     }
 
-    private void ShowDialok()
+    private async UniTaskVoid ShowDialok()
     {
+        int ani = await (int)story.variablesState["anim"];
+        string vscn =  story.variablesState["charname"].ToString();
+
         tmp.text = story.Continue();
-        tmpname.text = story.variablesState["charname"].ToString();
-        NameImag(story.variablesState["charname"].ToString(), naim[story.variablesState["charname"].ToString()]);
+
+        tmpname.text = vscn;
+        if(ani == 1 )
+        {
+            StartCoroutine(Animashka(1));
+            //return;
+        }
+        NameImag(naim[vscn]);
     }
 
-    private void NameImag(string charnam, int danuint)
+    private void NameImag(int danuint)
     {
         int oint = (int)story.variablesState["emotion"];
-       // img.sprite = naim[charnam];
         img.sprite = chrdt[danuint].sprut[oint];
-    /*    if (story.variablesState["charname"].ToString() == "Nyaaaaa")
-        {
-            Debug.Log("ouuuu");
-            img.sprite = imgess[1];
-        }
-        else if (story.variablesState["charname"].ToString() == "nya")
-        {
-            img.sprite = imgess[0];
-        } */
     } 
 
     public void BatonEkshn(int induk)

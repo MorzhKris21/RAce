@@ -1,14 +1,16 @@
 VAR charname = "Bulba"
 VAR emotion= 0
-
+VAR anim=0
 - nya
-nya.
+~charname= "gg"
+Что ня?.
+~charname= "Bulba"
     - nya..    
 + nyaa
     - nya?
 ~charname= "gg"
 
--nya nya
+-Уди, сказали диалоги нормальные писать
     +[ebd1?]
         ->ebd1
     +[ebd2?]
@@ -33,10 +35,10 @@ nya.
 
 - -> END*/
 === ebd1 ===
-~emotion = 2
+~anim=1
+- Ладно.
+~anim=0
 -nyar.
-*ff
--neahehe. FREEDOM OF CHOICE.
 ~charname = "Bulba"
 ->END
 === ebd2 ===

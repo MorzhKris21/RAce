@@ -5,7 +5,7 @@ using UnityEngine.TextCore.Text;
 
 public class dataCentr : smenaNaZavode
 {
-    public GameObject detectNPC;
+    [HideInInspector] public GameObject detectNPC;
     public CharacterController chara;
     public NovinochkaCC novinochkaCC;
     public Animator animator;

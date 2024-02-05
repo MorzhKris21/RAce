@@ -19,10 +19,10 @@ public class tyotyaklava : MonoBehaviour, IA.IDialogesustimActions
 
     void OnEnable()
     {
-        if (oi != null)
+        /*if (oi != null)
         {
           return;
-        }
+        }*/
         oi = new IA();
         oi.dialogesustim.Enable();
         oi.dialogesustim.SetCallbacks(this);
@@ -31,9 +31,5 @@ public class tyotyaklava : MonoBehaviour, IA.IDialogesustimActions
     void OnDisable()
     {
         oi.dialogesustim.Disable();
-    }
-    void Update()
-    {
-        
     }
 }

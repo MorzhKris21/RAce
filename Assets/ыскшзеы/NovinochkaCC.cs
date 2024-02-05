@@ -8,6 +8,7 @@ using UnityEngine.InputSystem;
 
 public class NovinochkaCC : MonoBehaviour,IA.IBUZZActions
 {
+    private kartoshka kartosh;
     private IA oi;
     public Vector2 actionsSklavoi;
     public Action prigskok;
@@ -21,11 +22,13 @@ public class NovinochkaCC : MonoBehaviour,IA.IBUZZActions
 
     private void OnEnable()
     {
-        camero=FindObjectOfType<CinemachineVirtualCamera>();
+        kartosh = FindObjectOfType<kartoshka>();
+        camero =FindObjectOfType<CinemachineVirtualCamera>();
         dC=GetComponent<dataCentr>();
         oi = new IA();
         oi.BUZZ.Enable();
         oi.BUZZ.SetCallbacks(this);
+
      
     }
     private void OnDisable()
@@ -92,7 +95,13 @@ public class NovinochkaCC : MonoBehaviour,IA.IBUZZActions
     {
         if (context.started && dC.Ff.col.CompareTag("ground"))
         {
-
+            var bu = dC.Ff.col.gameObject.GetComponent<klochokgryadki>().ma[4].gameObject;
+            if (bu.activeInHierarchy)
+            {
+                bu.SetActive(false);
+                kartosh.kartofel(1);
+                return;
+            } 
             dC.Ff.Spawf();
         }
     }

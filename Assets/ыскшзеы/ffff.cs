@@ -5,21 +5,10 @@ using UnityEngine;
 
 public class ffff : MonoBehaviour
 {
-    public GameObject col;
+    [HideInInspector] public GameObject col;
     public Texture tx;
     public Texture ty;      //Kaftosha
 
-
-
-    void Start()
-    {
-
-    }
-
-    void Update()
-    {
-
-    }
     public void Spawf()
     {
         col.GetComponent<Renderer>().material.mainTexture = ty;
@@ -29,7 +18,8 @@ public class ffff : MonoBehaviour
 
         if (collision.gameObject.CompareTag("ground")) {
             col = collision.gameObject;
-            collision.gameObject.GetComponent<Renderer>().material.mainTexture = tx;
+            col.GetComponentInChildren<Renderer>().material.mainTexture = tx;
+
         }
     }
   

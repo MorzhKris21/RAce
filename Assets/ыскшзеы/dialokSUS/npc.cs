@@ -9,7 +9,8 @@ using UnityEngine;
 public class npc : MonoBehaviour
 {
     private dialok dial;
-    private dataCentr dC;
+    [SerializeField] private npcType type;
+    public npcType Type => type;
     private void Start()
     {
         dial=FindObjectOfType<dialok>();
@@ -18,15 +19,11 @@ public class npc : MonoBehaviour
     {
         if (other.gameObject.TryGetComponent<dataCentr>(out dataCentr chara))
         {
-            dC = FindObjectOfType<dataCentr>();
-            dC.detectNPC = gameObject;
+            chara.detectNPC = gameObject;
+            Debug.Log(gameObject);
+            GetComponent<Collider>().enabled = false;
             dial.ContinueStory();
-            GetComponent<Collider>().enabled= false;
         }
     }
 
-    void Update()
-    {
-        
-    }
 }
